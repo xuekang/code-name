@@ -12,6 +12,7 @@ const name = defaultSettings.title || '' // page title
 
 module.exports = defineConfig({
   transpileDependencies: true,
+  publicPath:'/docs/',
   outputDir:'docs',
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

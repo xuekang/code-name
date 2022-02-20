@@ -6,6 +6,12 @@ import './plugins/element.js'
 
 Vue.config.productionTip = false
 
+// 加载全局方法
+import request from "@/utils/request";
+Object.defineProperty(Vue.prototype, "request", {
+  value: request
+});
+
 new Vue({
   el: '#app',
   store,
