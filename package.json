@@ -1,7 +1,8 @@
 {
   "name": "code-name",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Provides assistance to developers when naming variables for program development assistance",
+  "author": "xuekang <xuekang0@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -10,7 +11,9 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "element-ui": "^2.15.6",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

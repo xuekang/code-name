@@ -1,26 +1,24 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <div>
-      <p>
-        If Element is successfully added to this project, you'll see an
-        <code v-text="'<el-button>'"></code>
-        below
-      </p>
-      <el-button>el-button</el-button>
-    </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Hello App!</h1>
+    <p>
+      <!--使用 router-link 组件进行导航 -->
+      <!--通过传递 `to` 来指定链接 -->
+      <!--`<router-link>` 将呈现一个带有正确 `href` 属性的 `<a>` 标签-->
+      <router-link to="/">Go to Home</router-link>
+      <router-link to="/hellow">Go to hellow</router-link>
+    </p>
+    <!-- 路由出口 -->
+    <!-- 路由匹配到的组件将渲染在这里 -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
+  name: 'App',
+  components: {}
 }
 </script>
 
