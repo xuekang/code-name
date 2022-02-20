@@ -1,0 +1,57 @@
+.title {
+  margin: 0;
+  text-align: center;
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+  transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  @media screen and (min-width: 50rem) {
+    padding-top: 8rem;
+  }
+
+  span {
+    text-transform: uppercase;
+    font-size: 3.5rem;
+    font-weight: 100;
+    @media screen and (min-width: 50rem) {
+      font-size: 5rem;
+    }
+  }
+
+  & span {
+    /*C*/
+    &:nth-child(1) {
+      color: #4285F4;
+    }
+
+    /*O*/
+    &:nth-child(2) {
+      color: #DB4437;
+    }
+
+    /*D*/
+    &:nth-child(3) {
+      color: #F4B400;
+    }
+
+    /*E*/
+    &:nth-child(4) {
+      color: #4285F4;
+    }
+
+    &:nth-child(5) {
+      color: #0F9D58;
+    }
+
+    &:nth-child(6) {
+      color: #DB4437;
+    }
+
+    &:nth-child(7) {
+      color: #F4B400;
+    }
+
+    &:nth-child(8) {
+      color: #0F9D58;
+    }
+  }
+}
