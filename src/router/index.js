@@ -6,6 +6,10 @@ Vue.use(Router)
 
 export const constantRoutes = [
 	{
+		path:'/home',
+		component: () => import('@/views/home')
+	},
+	{
 		path:'/hellow',
 		component:HellowWorld
 	}
