@@ -43,24 +43,27 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-
+    const err_msg = res.message || '请求错误'
+    console.log('success',res,response.config)
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 0) {
       Message({
-        message: res.message || 'Error',
+        message: err_msg,
         type: 'error',
         duration: 5 * 1000
       })
 
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(new Error(err_msg))
     } else {
       return res.data
     }
   },
   error => {
-    console.log('err' + error) // for debug
+    const res = error.response.data
+    const err_msg = res.message || '请求错误'
+    console.log('err',error,error.response,error.request) // for debug  //error.response,error.request, error.config
     Message({
-      message: error.message,
+      message: err_msg,
       type: 'error',
       duration: 5 * 1000
     })
