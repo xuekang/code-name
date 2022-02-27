@@ -13,7 +13,7 @@
     <span>E</span>
   </h1>
   <div class="main-search">
-    <el-input placeholder="请输入内容" v-model="searchKey" class="input-with-select">
+    <el-input placeholder="请输入内容" v-model="searchKey" class="input-with-select" autocomplete="on" :clearable="true">
       <el-select v-model="lan" slot="prepend" placeholder="请选择" multiple collapse-tags>
         <el-option
           v-for="item in lanOpts"
@@ -24,6 +24,16 @@
       </el-select>
       <el-button slot="append" icon="el-icon-search" type="primary" :loading="searchLoading" v-on:click="search"></el-button>
     </el-input>
+    <div class="tag-group">
+      <span class="tag-group__title"></span>
+      <el-tag
+        v-for="item in result"
+        :key="item.keyword"
+        :type="item.color"
+        effect="plain">
+        {{ item.keyword }}
+      </el-tag>
+    </div>
   </div>
   <div class="footer"></div>
 </div>
@@ -64,9 +74,10 @@ export default {
   name: 'HomePage',
   data() {
     return {
-      lan: '',
+      lan: [],
       searchKey: '',
-      searchLoading: false
+      searchLoading: false,
+      result:[],
     }
   },
   computed: {
@@ -82,16 +93,19 @@ export default {
     search(){
       this.searchLoading = true
       this.request({
-        url: 'codename/translate',
+        url: 'codename/search',
         method: 'post',
         data:{
-          query:this.searchKey
+          query:this.searchKey,
+          lan:this.lan
         }
       }).then((data)=>{
         this.searchLoading = false
+        this.result = data
         console.log(111,data)
       }).catch(()=>{
         this.searchLoading = false
+        this.result = []
         console.log(222)
       })
     }
@@ -103,9 +117,16 @@ export default {
 <style lang="scss" scoped>
 .main-search{
   width: 45rem;
-  margin: 20px auto;
+  padding: 2rem 0 4rem;
+  margin: 0 auto;
   ::v-deep .el-select .el-select__tags{
     display:none;
+  }
+  .tag-group{
+    padding: 2rem 0;
+    ::v-deep .el-tag{
+      margin: 0.4rem 0.4rem 0 0;
+    }
   }
 }
 
