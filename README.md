@@ -1,5 +1,7 @@
 # code-name
 
+## [项目体验地址](http://113.57.215.186:9000/code-name/#/)
+
 ## Project setup
 ```
 yarn install
