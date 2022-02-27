@@ -22,7 +22,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-button slot="append" icon="el-icon-search" type="primary" :loading="searchLoading" v-on:click="search"></el-button>
+      <el-button slot="append" icon="el-icon-search" type="primary" :loading="searchLoading" v-on:click="onSearch"></el-button>
     </el-input>
     <div class="tag-group">
       <span class="tag-group__title"></span>
@@ -89,7 +89,27 @@ export default {
       return data
     }
   },
+  created(){
+    console.log(this.$route,this.$router)
+    let query = this.$route.query
+    if(query.searchKey){
+      this.searchKey = query.searchKey
+      this.search()
+    }
+  },
   methods:{
+    onSearch(){
+      let host = window.location.host
+      if(host === 'xuekang.github.io'){
+        let url = 'http://113.57.215.186:9000/code-name/#/'
+        if(this.searchKey){
+          url += '?searchKey=' + this.searchKey
+        }
+        window.location.href = url
+      }else{
+        this.search()
+      }
+    },
     search(){
       this.searchLoading = true
       this.request({
