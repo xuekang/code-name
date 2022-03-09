@@ -24,12 +24,16 @@
       </el-select>
       <el-button slot="append" icon="el-icon-search" type="primary" :loading="searchLoading" v-on:click="onSearch"></el-button>
     </el-input>
+    <!-- <el-tag class="search-result-tag" data-clipboard-text="text" v-on:click="onCopy($event,'text')">text</el-tag> -->
     <div class="tag-group">
       <span class="tag-group__title"></span>
       <el-tag
+        class="search-result-tag"
         v-for="item in result"
         :key="item.keyword"
         :type="item.color"
+        :data-clipboard-text="item.keyword"
+        v-on:click="onCopy()"
         effect="plain">
         {{ item.keyword }}
       </el-tag>
@@ -42,6 +46,7 @@
 
 <script>
 import './index.scss';
+import Clipboard from 'clipboard'
 
 // http://githut.info/
 const topProgramLan = [
@@ -90,7 +95,9 @@ export default {
     }
   },
   created(){
-    console.log(this.$route,this.$router)
+    //this.$route,this.$router
+    // console.log(this,this.Vue)
+
     let query = this.$route.query
     if(query.searchKey){
       this.searchKey = query.searchKey
@@ -98,17 +105,34 @@ export default {
     }
   },
   methods:{
+    onCopy($e,$text){
+      // console.log($e,$text)
+      let clipboard = new Clipboard('.search-result-tag')
+      clipboard.on('success', e => {
+        // console.log('复制成功',e)
+        this.$message('复制成功')
+        // 释放内存
+        clipboard.destroy()
+      })
+      clipboard.on('error', e => {
+        // 不支持复制
+        console.log('该浏览器不支持自动复制')
+        // 释放内存
+        clipboard.destroy()
+      })
+    },
     onSearch(){
-      let host = window.location.host
-      if(host === 'xuekang.github.io'){
-        let url = 'http://113.57.215.186:9000/code-name/#/'
-        if(this.searchKey){
-          url += '?searchKey=' + this.searchKey
-        }
-        window.location.href = url
-      }else{
-        this.search()
-      }
+      // let host = window.location.host
+      // if(host === 'xuekang.github.io'){
+      //   let url = 'http://113.57.215.186:9000/code-name/#/'
+      //   if(this.searchKey){
+      //     url += '?searchKey=' + this.searchKey
+      //   }
+      //   window.location.href = url
+      // }else{
+      //   this.search()
+      // }
+      this.search()
     },
     search(){
       this.searchLoading = true
