@@ -13,6 +13,12 @@
     <span>E</span>
   </h1>
   <div class="main-search">
+    <div class="search-model">
+      <el-radio-group v-model="search_model">
+        <el-radio :label="1">模糊模式</el-radio>
+        <el-radio :label="2">精准模式</el-radio>
+      </el-radio-group>
+    </div>
     <el-input placeholder="请输入内容" v-model="searchKey" class="input-with-select" autocomplete="on" :clearable="true">
       <el-select v-model="lan" slot="prepend" placeholder="请选择" multiple collapse-tags>
         <el-option
@@ -79,6 +85,7 @@ export default {
   name: 'HomePage',
   data() {
     return {
+      search_model:1,
       lan: [],
       searchKey: '',
       searchLoading: false,
@@ -141,7 +148,8 @@ export default {
         method: 'post',
         data:{
           query:this.searchKey,
-          lan:this.lan
+          lan:this.lan,
+          search_model:this.search_model,
         }
       }).then((data)=>{
         this.searchLoading = false
@@ -161,10 +169,14 @@ export default {
 <style lang="scss" scoped>
 .main-search{
   width: 45rem;
-  padding: 2rem 0 4rem;
+  padding: 0 0 4rem;
   margin: 0 auto;
   ::v-deep .el-select .el-select__tags{
     display:none;
+  }
+  .search-model{
+    text-align:center;
+    line-height:4em;
   }
   .tag-group{
     padding: 2rem 0;
