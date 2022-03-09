@@ -1,6 +1,6 @@
 # code-name
 
-## [项目体验地址](http://113.57.215.186:9000/code-name/#/)
+## [项目体验地址](https://xuekang.github.io/code-name/#/)
 
 ## Project setup
 ```
